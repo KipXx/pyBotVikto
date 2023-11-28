@@ -14,7 +14,7 @@ class TestResult(Base):
     score = Column(Integer)
 
 
-engine = create_engine('sqlite:///test_results.db', echo=True)
+engine = create_engine('sqlite:///date/test_results.db', echo=True)
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
