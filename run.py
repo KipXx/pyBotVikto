@@ -6,10 +6,15 @@ from aiogram import Bot, Dispatcher, types, F
 
 import register_user
 import results
-from API import API
+import json
 import test_on
+from date.qvest import start_on
 
-bot = Bot(token=API)
+with open('API.json', 'r') as file:
+    data = json.load(file)
+token = data["API"]
+
+bot = Bot(token=token)
 dp = Dispatcher()
 
 users = {}
@@ -17,7 +22,7 @@ users = {}
 
 @dp.message(F.text == '/start')
 async def start(message: types.Message):
-    await message.answer("Здравствуйте, это тест по Литературе!\n\n"
+    await message.answer(f"{start_on[0]['starts']}\n\n"
                          "💠Выберите нужную команду из меню для прохождения теста или открыть таблицу лидеров.\n"
                          "(Слева снизу три полоски или кнопка меню)*")
 
@@ -29,7 +34,7 @@ async def run():
         test_on.router,
 
     )
-    await dp.start_polling(bot, token=API)
+    await dp.start_polling(bot, token=token)
 
 
 if __name__ == '__main__':

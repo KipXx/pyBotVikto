@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from date import models
 from menu import key
 from date.qvest import qvest
+from date.qvest import coll
 from run import users
 
 router = Router()
@@ -47,7 +48,7 @@ async def answer(message: types.Message):
                 users[user_id]["current_question"] += 1
 
                 if current_question == len(qvest) - 1:
-                    await message.answer(f"Тест окончен! Вы набрали {score} баллов из 10.",
+                    await message.answer(f"Тест окончен! Вы набрали {score} баллов из {coll[0]['ball']}.",
                                          reply_markup=ReplyKeyboardRemove())
 
                     # Создайте новый экземпляр TestResult и сохраните его в базе данных

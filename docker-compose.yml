@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+    environment:
+      - qvest_reg=/path/to/qvest.py
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+
+  db:
+    image: pybotvik
+    environment:
+      POSTGRES_USER: kip
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: database
